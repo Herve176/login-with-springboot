@@ -15,4 +15,5 @@ public class GoogleLoginApplication {
 		SpringApplication.run(GoogleLoginApplication.class, args);
 	}
 
+
 }
