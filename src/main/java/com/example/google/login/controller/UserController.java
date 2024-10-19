@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 
 public class UserController {
@@ -47,9 +49,10 @@ public class UserController {
             return "Login Failed";
 
     }
-    @CrossOrigin(origins = "http://localhost:4200")
+
     @PostMapping("/api/auth/google")
-    public ResponseEntity<String> verifyUser(@RequestBody String idToken) {
+    public ResponseEntity<String> verifyUser(@RequestBody Map<String,String> token) {
+        String idToken = token.get("idToken");
         boolean isVerified = googleVerificationService.verifyGoogleToken(idToken);
         if (isVerified) {
             User userFromToken = googleVerificationService.extractUserFromToken(idToken);
